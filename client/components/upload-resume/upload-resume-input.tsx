@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useState, useRef, DragEvent, ChangeEvent } from "react"
 import { ResumeReview } from "@/types/resume-review"
-import ResumeReviewDisplay from "./resume-review-display"
+import ResumeReviewComponent from "../review"
+
 
 export default function UploadResume() {
   const [isDragging, setIsDragging] = useState<boolean>(false)
@@ -133,7 +134,7 @@ export default function UploadResume() {
 
   if (parsedReview) {
     return (
-      <ResumeReviewDisplay
+      <ResumeReviewComponent
         review={parsedReview}
         onReset={() => {
           setParsedReview(null)

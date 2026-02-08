@@ -1,8 +1,8 @@
 "use client"
 
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import UploadResume from "@/components/upload-resume"
+import Header from "@/components/upload-resume/header"
+import Footer from "@/components/upload-resume/footer"
+import UploadResume from "@/components/upload-resume/upload-resume-input"
 
 export default function Home() {
 
