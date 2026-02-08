@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import OpenAI from 'openai'
+import { OpenAI } from 'openai'
 import { extractTextFromPdf } from '../utils/extract-text.js'
 import { generateResumeSystemPrompt } from '../utils/system-prompt.js'
 
@@ -53,8 +53,8 @@ export async function reviewResumeController(req: Request, res: Response) {
     for await (const chunk of stream) {
       const delta = chunk.choices[0]?.delta
       const content = delta?.content || ''
-      // @ts-expect-error -- Ignore type error
-      const reasoning = delta?.reasoning_content || ''
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const reasoning = (delta as any)?.reasoning_content || ''
 
       if (reasoning) {
         res.write(`event: reasoning\n`)
