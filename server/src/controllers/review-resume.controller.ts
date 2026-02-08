@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { OpenRouter } from '@openrouter/sdk'
+import { extractTextFromPdf } from '../utils/extract-text.js'
 import { generateResumeSystemPrompt } from '../utils/system-prompt.js'
 
 const openrouter = new OpenRouter({
@@ -8,18 +9,28 @@ const openrouter = new OpenRouter({
 
 export async function reviewResumeController(req: Request, res: Response) {
   try {
-    const { resumeText, jobDescription } = req.body
+    const { jobDescription, jobRole } = req.body
+    let resumeText = req.body.resumeText
+
+    // Check if file is uploaded
+    if (req.file) {
+      resumeText = await extractTextFromPdf(req.file.buffer)
+    }
 
     console.log(process.env.OPENROUTER_API_KEY)
 
-    if (!resumeText || !jobDescription) {
+    if (!resumeText) {
       return res.status(400).json({
         success: false,
-        message: 'Resume text and job description are required',
+        message: 'Resume file or text is required',
       })
     }
 
-    const systemPrompt = generateResumeSystemPrompt(resumeText)
+    const systemPrompt = generateResumeSystemPrompt(
+      resumeText,
+      jobDescription,
+      jobRole,
+    )
 
     const stream = await openrouter.chat.send({
       model: 'z-ai/glm-4.5-air:free',

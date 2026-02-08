@@ -1,4 +1,8 @@
-export function generateResumeSystemPrompt(userResumeData: string) {
+export function generateResumeSystemPrompt(
+  userResumeData: string,
+  jobDescription?: string,
+  jobRole?: string,
+) {
   return `
 <system_instruction>
   <role>
@@ -60,6 +64,8 @@ export function generateResumeSystemPrompt(userResumeData: string) {
 
   <output_schema>
     You must output ONLY a valid JSON object. Do not provide preamble text.
+    Do not add comments, explanations, or parenthetical notes inside arrays or objects.
+    All strings must be properly escaped.
     The keys are numbered to enforce the specific narrative order requested.
 
     {
@@ -169,7 +175,12 @@ export function generateResumeSystemPrompt(userResumeData: string) {
   </example_interaction>
 </system_instruction>
 
+</element>
 <user_context>
+  The user is applying for the role of: "${jobRole || 'Not specified'}"
+  The job description they provided is:
+  "${jobDescription || 'Not specified'}"
+
   The user has submitted the following resume text for review:
   "${userResumeData}"
 </user_context>

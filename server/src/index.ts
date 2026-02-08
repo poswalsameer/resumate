@@ -1,10 +1,17 @@
 import 'dotenv/config'
 import express, { Request, Response } from 'express'
+import cors from 'cors'
 import reviewResumeRouter from './routes/review-resume.route.js'
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5000
 
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }),
+)
 app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
