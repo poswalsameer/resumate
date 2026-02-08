@@ -150,7 +150,7 @@ export default function UploadResume() {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-t-xl cursor-pointer transition-colors ${isDragging
+            className={`flex flex-col items-center justify-center w-full h-52 sm:h-64 border-2 border-dashed rounded-t-xl cursor-pointer transition-colors ${isDragging
               ? 'border-primary bg-primary/5'
               : 'border-muted-foreground/30 bg-card hover:bg-muted/50'
               }`}
@@ -171,17 +171,17 @@ export default function UploadResume() {
               <div className="text-center">
                 {file ? (
                   <>
-                    <p className="text-lg font-medium text-foreground">{file.name}</p>
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <p className="text-base sm:text-lg font-medium text-foreground">{file.name}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                       Click or drag to replace
                     </p>
                   </>
                 ) : (
                   <>
-                    <p className="text-lg font-medium text-foreground">
+                    <p className="text-sm sm:text-lg font-medium text-foreground">
                       Drop your PDF here or click to browse
                     </p>
-                    <p className="text-sm text-muted-foreground mt-2">Max size: 5MB</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-2">Max size: 5MB</p>
                   </>
                 )}
               </div>
@@ -194,10 +194,10 @@ export default function UploadResume() {
               <Input
                 id="job-desc"
                 type="text"
-                placeholder="Job Description..."
+                placeholder="Job Description (Optional)"
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
-                className="bg-white border-2 border-t-0 border-b-0 border-r-0 border-dashed border-muted-foreground/30 text-zinc-900 placeholder:text-zinc-500 focus-visible:ring-0 focus-visible:border-purple-500 focus-visible:border-solid rounded-none h-12 px-4 py-8"
+                className="text-sm sm:text-base bg-white border-2 border-t-0 border-b-0 border-r-0 border-dashed border-muted-foreground/30 text-zinc-900 placeholder:text-zinc-500 focus-visible:ring-0 focus-visible:border-dashed focus-visible:border-muted-foreground/30 rounded-none h-12 px-4 py-8"
               />
             </div>
 
@@ -209,7 +209,7 @@ export default function UploadResume() {
                 placeholder="Job Role"
                 value={jobRole}
                 onChange={(e) => setJobRole(e.target.value)}
-                className="bg-white border-2 border-t-0 border-b-0 border-dashed border-muted-foreground/30 text-zinc-900 placeholder:text-zinc-500 focus-visible:ring-0 focus-visible:border-purple-500 focus-visible:border-solid rounded-none h-12 px-4 py-8"
+                className="text-sm sm:text-base bg-white border-2 border-t-0 border-b-0 border-dashed border-muted-foreground/30 text-zinc-900 placeholder:text-zinc-500 focus-visible:ring-0 focus-visible:border-dashed focus-visible:border-muted-foreground/30 rounded-none h-12 px-4 py-8"
               />
             </div>
           </div>
@@ -217,7 +217,7 @@ export default function UploadResume() {
           <Button
             onClick={handleReviewResume}
             disabled={isLoading || !file}
-            className="w-full py-8 text-lg font-bold rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none"
+            className="w-full py-6 sm:py-8 text-lg sm:text-xl font-medium rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none"
           >
             {isLoading ? "Reviewing..." : "Start Review"}
           </Button>

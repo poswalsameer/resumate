@@ -24,7 +24,7 @@ export default function ThinkingProcess({ thinkingText, isThinkingDone }: Thinki
           <div className="p-6 h-[300px] overflow-y-auto font-mono font-normal text-sm bg-transparent text-black">
             {thinkingText ? (
               <div className="space-y-1">
-                <span className="whitespace-pre-wrap leading-relaxed">{thinkingText}</span>
+                <span className="text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">{thinkingText}</span>
               </div>
             ) : (
               <div className="flex items-center gap-2 text-zinc-800">
