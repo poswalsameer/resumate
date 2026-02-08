@@ -1,6 +1,6 @@
 import type { Structure } from "@/types/resume-review"
 
-export default function Structure({ sections }: { sections: Structure }) {
+export default function StructureComponent({ sections }: { sections: Structure }) {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="text-base font-medium text-black">{sections.layout_critique}</div>

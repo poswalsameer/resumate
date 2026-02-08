@@ -1,10 +1,6 @@
-interface ResumeScoreProps {
-  assessment: {
-    overall_score: number
-  }
-}
+import type { ResumeScore } from "@/types/resume-review"
 
-export default function ResumeScore({ assessment }: ResumeScoreProps) {
+export default function ResumeScoreComponent({ assessment }: { assessment: ResumeScore }) {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between p-5 bg-transparent border-2 border-b-0 rounded-t-xl border-muted-foreground/30">
       <div className="flex flex-col gap-y-2">

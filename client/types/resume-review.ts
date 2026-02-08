@@ -12,6 +12,10 @@ export type ResumeReview = {
   }
 }
 
+export type ResumeScore = {
+  overall_score: number
+}
+
 export type General = {
   summary: string
   tone_check: string

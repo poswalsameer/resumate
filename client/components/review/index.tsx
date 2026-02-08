@@ -1,36 +1,38 @@
 import { useState } from "react"
-import Impact from "./impact"
-import General from "./general"
-import Language from "./language"
-import Structure from "./structure"
-import AtsAdvice from "./ats-advice"
-import SoftSkills from "./soft-skills"
-import ResumeScore from "./resume-score"
+import ImpactComponent from "./impact"
+import GeneralComponent from "./general"
+import LanguageComponent from "./language"
+import StructureComponent from "./structure"
+import AtsAdviceComponent from "./ats-advice"
+import SoftSkillsComponent from "./soft-skills"
 import { Button } from "@/components/ui/button"
-import { ResumeReview } from "@/types/resume-review"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { fileAtom, jobDescriptionAtom, jobRoleAtom, parsedReviewAtom } from "@/store"
+import { useAtom, useSetAtom } from "jotai"
+import type { AtsAdvice, General, Impact, Language, ResumeScore, SoftSkills, Structure } from "@/types/resume-review"
+import ResumeScoreComponent from "./resume-score"
 
-interface ResumeReviewDisplayProps {
-  review: ResumeReview
-  onReset: () => void
-}
 
-export default function ResumeReviewComponent({ review, onReset }: ResumeReviewDisplayProps) {
+export default function ResumeReviewComponent() {
+  const [parsedReview, setParsedReview] = useAtom(parsedReviewAtom)
+  const setJobDescription = useSetAtom(jobDescriptionAtom)
+  const setJobRole = useSetAtom(jobRoleAtom)
+  const setFile = useSetAtom(fileAtom)
+
   const [tab, setTab] = useState<string>("general")
 
-  const general = review["1_general_impression"]
-  const impact = review["2_quantifying_impact"]
-  const ats = review["3_ats_and_keywords"]
-  const sections = review["4_resume_sections"]
-  const repetition = review["5_word_repetition"]
-  const softSkills = review["6_soft_skills_check"]
-  const assessment = review["7_final_assessment"]
+  const general = parsedReview?.["1_general_impression"]
+  const impact = parsedReview?.["2_quantifying_impact"]
+  const ats = parsedReview?.["3_ats_and_keywords"]
+  const sections = parsedReview?.["4_resume_sections"]
+  const repetition = parsedReview?.["5_word_repetition"]
+  const softSkills = parsedReview?.["6_soft_skills_check"]
 
   return (
     <Card className="w-full bg-transparent border-none shadow-none">
       <CardContent className="flex flex-col">
-        <ResumeScore assessment={assessment} />
+        <ResumeScoreComponent assessment={parsedReview?.["7_final_assessment"] as ResumeScore} />
 
         <Tabs value={tab} onValueChange={setTab} className="w-full flex flex-col gap-0">
           <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 bg-transparent rounded-none gap-0 p-0">
@@ -43,17 +45,22 @@ export default function ResumeReviewComponent({ review, onReset }: ResumeReviewD
           </TabsList>
 
           <TabsContent value={tab} className="border-2 border-muted-foreground/30 p-4 border-b-0 border-t-0">
-            {tab === "general" && <General general={general} />}
-            {tab === "impact" && <Impact impact={impact} />}
-            {tab === "ats" && <AtsAdvice ats={ats} />}
-            {tab === "structure" && <Structure sections={sections} />}
-            {tab === "language" && <Language repetition={repetition} />}
-            {tab === "soft-skills" && <SoftSkills softSkills={softSkills} />}
+            {tab === "general" && <GeneralComponent general={general as General} />}
+            {tab === "impact" && <ImpactComponent impact={impact as Impact} />}
+            {tab === "ats" && <AtsAdviceComponent ats={ats as AtsAdvice} />}
+            {tab === "structure" && <StructureComponent sections={sections as Structure} />}
+            {tab === "language" && <LanguageComponent repetition={repetition as Language} />}
+            {tab === "soft-skills" && <SoftSkillsComponent softSkills={softSkills as SoftSkills} />}
           </TabsContent>
         </Tabs>
 
         <Button
-          onClick={onReset}
+          onClick={() => {
+            setParsedReview(null)
+            setJobDescription("")
+            setJobRole("")
+            setFile(null)
+          }}
           className="w-full py-7 text-lg font-medium rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none gap-2"
         >
           Upload Another Resume

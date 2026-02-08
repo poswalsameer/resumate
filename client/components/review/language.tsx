@@ -1,6 +1,6 @@
 import type { Language } from "@/types/resume-review"
 
-export default function Language({ repetition }: { repetition: Language }) {
+export default function LanguageComponent({ repetition }: { repetition: Language }) {
   return (
     <div className="flex flex-col gap-y-4">
       <div className="font-medium text-xl text-zinc-900">

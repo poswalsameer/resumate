@@ -1,6 +1,6 @@
 import type { General } from "@/types/resume-review"
 
-export default function General({ general }: { general: General }) {
+export default function GeneralComponent({ general }: { general: General }) {
   return (
     <div className="flex flex-col gap-y-6">
       <div className="w-full flex flex-col ">

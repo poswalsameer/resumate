@@ -1,20 +1,22 @@
+import { useAtom } from "jotai"
 import { FileUp } from "lucide-react"
+import ResumeReviewComponent from "../review"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { ResumeReview } from "@/types/resume-review"
 import { Card, CardContent } from "@/components/ui/card"
 import { useState, useRef, DragEvent, ChangeEvent } from "react"
-import { ResumeReview } from "@/types/resume-review"
-import ResumeReviewComponent from "../review"
+import { parsedReviewAtom, jobDescriptionAtom, jobRoleAtom, fileAtom } from "@/store"
 
 
 export default function UploadResume() {
-  const [isDragging, setIsDragging] = useState<boolean>(false)
-  const [file, setFile] = useState<File | null>(null)
-  const [jobDescription, setJobDescription] = useState<string>("")
-  const [jobRole, setJobRole] = useState<string>("")
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [jobRole, setJobRole] = useAtom(jobRoleAtom)
+  const [parsedReview, setParsedReview] = useAtom(parsedReviewAtom)
+  const [jobDescription, setJobDescription] = useAtom(jobDescriptionAtom)
+  const [file, setFile] = useAtom(fileAtom)
 
-  const [parsedReview, setParsedReview] = useState<ResumeReview | null>(null)
+  const [isDragging, setIsDragging] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -56,8 +58,6 @@ export default function UploadResume() {
     setParsedReview(null)
 
     let fullReviewText = ""
-
-
 
     try {
       const formData = new FormData()
@@ -132,19 +132,7 @@ export default function UploadResume() {
     }
   }
 
-  if (parsedReview) {
-    return (
-      <ResumeReviewComponent
-        review={parsedReview}
-        onReset={() => {
-          setParsedReview(null)
-          setFile(null)
-          setJobDescription("")
-          setJobRole("")
-        }}
-      />
-    )
-  }
+  if (parsedReview) return <ResumeReviewComponent />
 
   return (
     <Card className="w-full bg-transparent border-none shadow-none">

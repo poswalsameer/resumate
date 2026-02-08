@@ -1,6 +1,6 @@
 import type { SoftSkills } from "@/types/resume-review"
 
-export default function SoftSkills({ softSkills }: { softSkills: SoftSkills }) {
+export default function SoftSkillsComponent({ softSkills }: { softSkills: SoftSkills }) {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="flex flex-col gap-y-1">

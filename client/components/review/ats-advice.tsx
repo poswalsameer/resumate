@@ -2,7 +2,7 @@ import { Badge } from "../ui/badge"
 import type { AtsAdvice } from "@/types/resume-review"
 
 
-export default function AtsAdvice({ ats }: { ats: AtsAdvice }) {
+export default function AtsAdviceComponent({ ats }: { ats: AtsAdvice }) {
   return (
     <div className="flex flex-col gap-y-8">
 

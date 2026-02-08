@@ -1,6 +1,6 @@
 import type { Impact } from "@/types/resume-review"
 
-export default function Impact({ impact }: { impact: Impact }) {
+export default function ImpactComponent({ impact }: { impact: Impact }) {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="flex flex-col gap-y-1">
