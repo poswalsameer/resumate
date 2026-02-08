@@ -1,6 +1,7 @@
 import { useAtom } from "jotai"
 import { FileUp } from "lucide-react"
 import ResumeReviewComponent from "../review"
+import ThinkingProcess from "../review/thinking-process"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ResumeReview } from "@/types/resume-review"
@@ -17,6 +18,8 @@ export default function UploadResume() {
 
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [thinkingText, setThinkingText] = useState<string>("")
+  const [isThinkingDone, setIsThinkingDone] = useState<boolean>(false)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -56,6 +59,8 @@ export default function UploadResume() {
 
     setIsLoading(true)
     setParsedReview(null)
+    setThinkingText("")
+    setIsThinkingDone(false)
 
     let fullReviewText = ""
 
@@ -97,8 +102,9 @@ export default function UploadResume() {
               try {
                 const data = JSON.parse(dataStr)
                 if (currentEvent === "reasoning" && data.text) {
-                  // reasoning is ignored for now
+                  setThinkingText((prev) => prev + data.text)
                 } else if (currentEvent === "content" && data.text) {
+                  setIsThinkingDone(true)
                   fullReviewText += data.text
                 } else if (!currentEvent && data.text) {
                   fullReviewText += data.text
@@ -132,6 +138,7 @@ export default function UploadResume() {
     }
   }
 
+  if (isLoading) return <ThinkingProcess thinkingText={thinkingText} isThinkingDone={isThinkingDone} />
   if (parsedReview) return <ResumeReviewComponent />
 
   return (

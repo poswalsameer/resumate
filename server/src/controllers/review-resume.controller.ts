@@ -51,7 +51,15 @@ export async function reviewResumeController(req: Request, res: Response) {
     })
 
     for await (const chunk of stream) {
-      const content = chunk.choices[0]?.delta?.content || ''
+      const delta = chunk.choices[0]?.delta
+      const content = delta?.content || ''
+      // @ts-expect-error -- Ignore type error
+      const reasoning = delta?.reasoning_content || ''
+
+      if (reasoning) {
+        res.write(`event: reasoning\n`)
+        res.write(`data: ${JSON.stringify({ text: reasoning })}\n\n`)
+      }
 
       if (content) {
         res.write(`event: content\n`)
