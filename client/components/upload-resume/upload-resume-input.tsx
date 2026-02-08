@@ -70,7 +70,7 @@ export default function UploadResume() {
       formData.append("jobDescription", jobDescription)
       formData.append("jobRole", jobRole)
 
-      const response = await fetch(`http://localhost:5000/api/v1/review-resume`, {
+      const response = await fetch(`https://resumate-sand.vercel.app/api/v1/review-resume`, {
         method: "POST",
         body: formData,
       })
