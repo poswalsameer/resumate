@@ -3,14 +3,14 @@ import type { Language } from "@/types/resume-review"
 export default function LanguageComponent({ repetition }: { repetition: Language }) {
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="font-medium text-xl text-zinc-900">
+      <div className="font-medium text-lg sm:text-xl text-zinc-900">
         Vocabulary Variety
       </div>
 
       {repetition.repetitive_words.length > 0 ? (
         <div className="border border-muted-foreground/30 rounded-none overflow-hidden">
           <table className="w-full text-sm text-left">
-            <thead className="bg-transparent border-b border-muted-foreground/30 text-black text-lg font-medium">
+            <thead className="bg-transparent border-b border-muted-foreground/30 text-black text-base sm:text-lg font-medium">
               <tr>
                 <th className="px-6 py-3 w-1/3 font-medium">Your Words</th>
                 <th className="px-6 py-3 font-medium">Better Alternatives</th>
@@ -21,7 +21,7 @@ export default function LanguageComponent({ repetition }: { repetition: Language
                 const synonyms = repetition.better_synonyms[word] || []
                 return (
                   <tr key={word} className="bg-transparent hover:bg-zinc-50/50 transition-colors">
-                    <td className="px-6 py-3 font-medium text-zinc-900 capitalize">
+                    <td className="px-6 py-3 text-xs sm:text-sm font-medium text-zinc-900 capitalize">
                       {word}
                     </td>
                     <td className="px-6 py-3">
@@ -30,7 +30,7 @@ export default function LanguageComponent({ repetition }: { repetition: Language
                           {synonyms.map((syn) => (
                             <div
                               key={syn}
-                              className="bg-purple-50 text-purple-700 font-medium hover:bg-purple-100 hover:text-purple-800 border-purple-100"
+                              className="text-xs sm:text-sm bg-purple-50 text-purple-700 font-medium hover:bg-purple-100 hover:text-purple-800 border-purple-100"
                             >
                               {syn}
                             </div>

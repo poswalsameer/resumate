@@ -217,7 +217,7 @@ export default function UploadResume() {
           <Button
             onClick={handleReviewResume}
             disabled={isLoading || !file}
-            className="w-full py-6 sm:py-8 text-lg sm:text-xl font-medium rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none"
+            className="cursor-pointer w-full py-6 sm:py-8 text-lg sm:text-xl font-medium rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none"
           >
             {isLoading ? "Reviewing..." : "Start Review"}
           </Button>

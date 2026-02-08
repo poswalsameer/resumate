@@ -35,16 +35,28 @@ export default function ResumeReviewComponent() {
         <ResumeScoreComponent assessment={parsedReview?.["7_final_assessment"] as ResumeScore} />
 
         <Tabs value={tab} onValueChange={setTab} className="w-full flex flex-col gap-0">
-          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 bg-transparent rounded-none gap-0 p-0">
-            <TabsTrigger value="general" className="text-black border-y-2 border-l-2 border-r-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">General</TabsTrigger>
-            <TabsTrigger value="impact" className="text-black border-y-2 border-l-0 border-r-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">Impact</TabsTrigger>
-            <TabsTrigger value="ats" className="text-black border-y-2 border-l-0 border-r-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">ATS</TabsTrigger>
-            <TabsTrigger value="structure" className="text-black border-y-2 border-l-0 border-r-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">Structure</TabsTrigger>
-            <TabsTrigger value="language" className="text-black border-y-2 border-l-0 border-r-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">Words</TabsTrigger>
-            <TabsTrigger value="soft-skills" className="text-black border-y-2 border-l-0 border-r-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">Skills</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 bg-transparent rounded-none gap-0 p-0 h-auto items-stretch">
+            <TabsTrigger value="general" className="h-full text-black border-t-2 border-l-2 border-r-2 border-b-0 lg:border-y-2 lg:border-l-2 lg:border-r-2 lg:border-b-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">
+              General
+            </TabsTrigger>
+            <TabsTrigger value="impact" className="h-full text-black border-t-2 border-l-0 border-r-2 border-b-0 lg:border-y-2 lg:border-l-0 lg:border-r-2 lg:border-b-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">
+              Impact
+            </TabsTrigger>
+            <TabsTrigger value="ats" className="h-full text-black border-t-2 border-l-0 border-r-2 border-b-0 lg:border-y-2 lg:border-l-0 lg:border-r-2 lg:border-b-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">
+              ATS
+            </TabsTrigger>
+            <TabsTrigger value="structure" className="h-full text-black border-y-2 border-l-0 border-r-2 lg:border-y-2 lg:border-l-0 lg:border-r-2 lg:border-b-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">
+              Structure
+            </TabsTrigger>
+            <TabsTrigger value="language" className="h-full text-black border-y-2 border-l-0 border-r-2 lg:border-y-2 lg:border-l-0 lg:border-r-2 lg:border-b-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">
+              Words
+            </TabsTrigger>
+            <TabsTrigger value="soft-skills" className="h-full text-black border-y-2 border-l-0 border-r-2 lg:border-y-2 lg:border-l-0 lg:border-r-2 lg:border-b-2 border-muted-foreground/30 rounded-none data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">
+              Skills
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value={tab} className="border-2 border-muted-foreground/30 p-4 border-b-0 border-t-0">
+          <TabsContent value={tab} className="border-2 border-muted-foreground/30 p-4 pt-12 lg:p-4 border-b-0 border-t-0">
             {tab === "general" && <GeneralComponent general={general as General} />}
             {tab === "impact" && <ImpactComponent impact={impact as Impact} />}
             {tab === "ats" && <AtsAdviceComponent ats={ats as AtsAdvice} />}
@@ -61,7 +73,7 @@ export default function ResumeReviewComponent() {
             setJobRole("")
             setFile(null)
           }}
-          className="w-full py-7 text-lg font-medium rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none gap-2"
+          className="cursor-pointer w-full py-6 sm:py-7 text-base sm:text-lg font-medium rounded-none rounded-b-xl bg-purple-700 text-white hover:bg-purple-800 transition-all shadow-none gap-2"
         >
           Upload Another Resume
         </Button>

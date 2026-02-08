@@ -2,9 +2,9 @@ import type { ResumeScore } from "@/types/resume-review"
 
 export default function ResumeScoreComponent({ assessment }: { assessment: ResumeScore }) {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between p-5 bg-transparent border-2 border-b-0 rounded-t-xl border-muted-foreground/30">
-      <div className="flex flex-col gap-y-2">
-        <h2 className="text-2xl font-medium tracking-tight text-zinc-900">Resume Review Complete</h2>
+    <div className="flex flex-col md:flex-row items-center justify-between p-5 bg-transparent border-2 border-b-0 rounded-t-xl border-muted-foreground/30 gap-y-6 md:gap-y-0">
+      <div className="flex flex-col justify-center md:items-start  items-center gap-y-2">
+        <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-zinc-900">Resume Review Complete</h2>
         <p className="text-zinc-800 font-medium">
           Your score: <span className="font-medium text-purple-700">{assessment.overall_score}/100</span>
         </p>
