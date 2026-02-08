@@ -83,20 +83,30 @@ export default function UploadResume() {
       const decoder = new TextDecoder()
 
       if (reader) {
+        let buffer = ""
+        let currentEvent: string | null = null
+
         while (true) {
           const { done, value } = await reader.read()
           if (done) break
 
           const chunk = decoder.decode(value, { stream: true })
-          const lines = chunk.split("\n")
+          buffer += chunk
 
-          let currentEvent = null
+          const lines = buffer.split("\n")
+          buffer = lines.pop() || ""
 
           for (const line of lines) {
-            if (line.startsWith("event: ")) {
-              currentEvent = line.slice(7).trim()
-            } else if (line.startsWith("data: ")) {
-              const dataStr = line.slice(6).trim()
+            const trimmedLine = line.trim()
+            if (!trimmedLine) {
+              currentEvent = null
+              continue
+            }
+
+            if (trimmedLine.startsWith("event:")) {
+              currentEvent = trimmedLine.slice(6).trim()
+            } else if (trimmedLine.startsWith("data:")) {
+              const dataStr = trimmedLine.slice(5).trim()
               if (!dataStr) continue
 
               try {
@@ -120,15 +130,26 @@ export default function UploadResume() {
       // Attempt to parse the accumulated JSON
       try {
         // Clean up markdown code blocks if present
-        const cleanedText = fullReviewText
+        let cleanedText = fullReviewText
           .replace(/```json/gi, "")
           .replace(/```/g, "")
           .trim()
+
+        // Find the first '{' and the last '}' to extract the JSON object
+        const firstOpenBrace = cleanedText.indexOf("{")
+        const lastCloseBrace = cleanedText.lastIndexOf("}")
+
+        if (firstOpenBrace !== -1 && lastCloseBrace !== -1 && lastCloseBrace > firstOpenBrace) {
+          cleanedText = cleanedText.substring(firstOpenBrace, lastCloseBrace + 1)
+        }
+
         const jsonResponse = JSON.parse(cleanedText) as ResumeReview
         setParsedReview(jsonResponse)
       } catch (parseError) {
         console.error("Failed to parse final JSON:", parseError)
-        console.log("Raw text:", fullReviewText)
+        console.log("Raw text length:", fullReviewText.length)
+        console.log("First 100 chars:", fullReviewText.substring(0, 100))
+        console.log("Last 100 chars:", fullReviewText.substring(fullReviewText.length - 100))
       }
 
     } catch (error) {
