@@ -21,18 +21,17 @@ export default function ResumeReviewDisplay({ review, onReset }: ResumeReviewDis
 
   return (
     <Card className="w-full bg-transparent border-none shadow-none">
-      <CardContent className="flex flex-col gap-0 p-0 border">
-
-        <div className="flex flex-col md:flex-row gap-6 items-center justify-between p-6 bg-white border-2 border-b-0 rounded-t-xl border-dashed border-muted-foreground/30">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-bold tracking-tight text-zinc-900">Resume Audit Complete</h2>
-            <p className="text-zinc-500">
-              Your score: <span className="font-bold text-purple-600">{assessment.overall_score}/100</span>
+      <CardContent className="flex flex-col gap-0 p-0 ">
+        <div className="flex flex-col md:flex-row items-center justify-between p-5 bg-transparent border-2 border-b-0 rounded-t-xl border-dashed border-muted-foreground/30">
+          <div className="flex flex-col gap-y-2">
+            <h2 className="text-2xl font-medium tracking-tight text-zinc-900">Resume Review Complete</h2>
+            <p className="text-zinc-800 font-medium">
+              Your score: <span className="font-medium text-purple-700">{assessment.overall_score}/100</span>
             </p>
           </div>
           <div className="flex items-center gap-4">
             <div className="relative flex items-center justify-center w-16 h-16 rounded-full border-4 border-purple-100">
-              <span className="text-xl font-bold text-purple-600">{assessment.overall_score}</span>
+              <span className="text-xl font-medium text-purple-700">{assessment.overall_score}</span>
               <svg className="absolute w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                 <circle
                   className="text-purple-600"
@@ -50,17 +49,17 @@ export default function ResumeReviewDisplay({ review, onReset }: ResumeReviewDis
           </div>
         </div>
 
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="border grid w-full grid-cols-3 lg:grid-cols-6 border-transparent h-auto p-0 bg-white rounded-none">
-            <TabsTrigger value="overview" className="rounded-none data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 data-[state=active]:shadow-none">General</TabsTrigger>
-            <TabsTrigger value="impact" className="rounded-none data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 data-[state=active]:shadow-none">Impact</TabsTrigger>
-            <TabsTrigger value="ats" className="rounded-none data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 data-[state=active]:shadow-none">ATS</TabsTrigger>
-            <TabsTrigger value="structure" className="rounded-none data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 data-[state=active]:shadow-none">Structure</TabsTrigger>
-            <TabsTrigger value="language" className="rounded-none data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 data-[state=active]:shadow-none">Words</TabsTrigger>
-            <TabsTrigger value="soft-skills" className="rounded-none data-[state=active]:bg-purple-50 data-[state=active]:text-purple-700 data-[state=active]:shadow-none">Skills</TabsTrigger>
+        <Tabs defaultValue="overview" className="w-full flex flex-col gap-0 border-2 border-dashed border-muted-foreground/30 border-t-0 border-b-0">
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 bg-transparent rounded-none gap-0 p-0">
+            <TabsTrigger value="overview" className="rounded-none border-r-2 border-dashed border-muted-foreground/30 py-4 data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none lg:border-r-2">General</TabsTrigger>
+            <TabsTrigger value="impact" className="rounded-none border-r-2 border-dashed border-muted-foreground/30 py-4 data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none lg:border-r-2">Impact</TabsTrigger>
+            <TabsTrigger value="ats" className="rounded-none border-r-2 border-dashed border-muted-foreground/30 py-4 data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none lg:border-r-2">ATS</TabsTrigger>
+            <TabsTrigger value="structure" className="rounded-none border-r-2 border-dashed border-muted-foreground/30 py-4 data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none lg:border-r-2">Structure</TabsTrigger>
+            <TabsTrigger value="language" className="rounded-none border-r-2 border-dashed border-muted-foreground/30 py-4 data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none lg:border-r-2">Words</TabsTrigger>
+            <TabsTrigger value="soft-skills" className="rounded-none py-4 data-[state=active]:bg-purple-700 data-[state=active]:text-white data-[state=active]:shadow-none">Skills</TabsTrigger>
           </TabsList>
 
-          <div className="bg-white border-2 border-dashed border-muted-foreground/30 border-b-0 p-6 ">
+          <div className="bg-transparent p-6 ">
             <TabsContent value="overview" className="mt-0 space-y-4 focus-visible:ring-0">
               <div>
                 <h4 className="font-semibold mb-2 flex items-center gap-2 text-zinc-900">
